@@ -1,0 +1,3 @@
+MessageDigest class is an class who helps us to implements a specific digest algorithm for security.
+So in example in my code i learned the Md5 which is a cryptographic hash algorithm that can be used to create 128-bit string vakue from an arbitrary length string
+

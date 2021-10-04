@@ -26,4 +26,6 @@ public class Account {
      * historic of transactions
      */
      private ArrayList<Transaction> transactions;
+
+
 }

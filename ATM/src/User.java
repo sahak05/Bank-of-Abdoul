@@ -1,10 +1,12 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.security.MessageDigest;
 
 public class User {
     /**
      * The first Name
      */
-    private String FirstName;
+    private String firstName;
 
     /**
      * The last Name
@@ -25,4 +27,41 @@ public class User {
      * The list of accounts for this user
      */
     private ArrayList<Account> accounts;
+
+    /**
+     * Create a New User
+     * @param firstName
+     * @param lastName
+     * @param pin
+     * @param theBank
+     */
+    public User(String firstName, String lastName, String pin, Bank theBank){
+
+        //set user's name
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+        //store the pin's MDS hash, rather than the original value,
+        //for security reasons 
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            this.pinHash = md.digest(pin.getBytes());
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("error, caught NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        //get a new, unique ID for User
+        //by generate a method in our bank class to creates them
+        this.uuid = theBank.getNnewUserUUID();
+
+        //create empty list of accounts
+        this.accounts = new ArrayList<Account>();
+
+        //print a log message
+        System.out.printf("New user %s, %s with ID %s created.\n", lastName, firstName, this.uuid);
+
+
+    }
 }
