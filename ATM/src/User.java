@@ -65,6 +65,19 @@ public class User {
 
     }
 
-    public void addAccount(Account account) {
+    /**
+     *Getter
+     * @return the uuid
+     */
+    public String getUUID() {
+        return uuid;
+    }
+
+    /**
+     * add an account
+     * @param acc
+     */
+    public void addAccount(Account acc) {
+        this.accounts.add(acc);
     }
 }
