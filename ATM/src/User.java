@@ -42,7 +42,7 @@ public class User {
         this.lastName = lastName;
 
         //store the pin's MDS hash, rather than the original value,
-        //for security reasons 
+        //for security reasons
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             this.pinHash = md.digest(pin.getBytes());
@@ -54,7 +54,7 @@ public class User {
 
         //get a new, unique ID for User
         //by generate a method in our bank class to creates them
-        this.uuid = theBank.getNnewUserUUID();
+        this.uuid = theBank.getNewUserUUID();
 
         //create empty list of accounts
         this.accounts = new ArrayList<Account>();
@@ -63,5 +63,8 @@ public class User {
         System.out.printf("New user %s, %s with ID %s created.\n", lastName, firstName, this.uuid);
 
 
+    }
+
+    public void addAccount(Account account) {
     }
 }
