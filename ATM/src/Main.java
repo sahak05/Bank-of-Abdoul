@@ -32,7 +32,7 @@ public class Main {
 
     /**
      * Want to keep the login space open until we have a real user of the Bank
-     * @param theBank
+     * @param {Bank} theBank
      * @param scan
      * @return
      */
