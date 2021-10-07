@@ -80,4 +80,21 @@ public class User {
     public void addAccount(Account acc) {
         this.accounts.add(acc);
     }
+
+    /**
+     * Check if the pin matches wit the true User pin
+     * @param aPin the pin to check
+     * @return wheter the pin is value or not
+     */
+    public boolean validatePin(String aPin) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return MessageDigest.isEqual(md.digest(aPin.getBytes()),this.pinHash );
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("error, caught NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
 }

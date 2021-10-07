@@ -98,4 +98,16 @@ public class Bank {
         this.addAccount(newAccount);
         return newUser;
     }
+
+    public User userLogin(String userID, String pin){
+
+        //search through list of users
+        for(User u: this.users){
+
+            //check user ID is correct
+            if(u.getUUID().compareTo(userID) ==0 && u.validatePin(pin))
+                return u;
+        }
+        return null;
+    }
 }
