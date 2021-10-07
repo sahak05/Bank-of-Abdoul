@@ -3,11 +3,26 @@ import java.util.Random;
 
 public class Bank {
 
-    private String Name;
+    private String name;
 
     private ArrayList<User> users;
 
     private ArrayList<Account> accounts;
+
+    /**
+     * Create a new Bank object with empty users and accounts
+     * @param name
+     */
+    public Bank(String name) {
+
+        this.name = name;
+        this.users = new ArrayList<User>();
+        this.accounts = new ArrayList<Account>();
+    }
+
+    public String getName() {
+        return name;
+    }
 
     /**
      * generate unique ID for user
