@@ -82,26 +82,31 @@ public class Main {
         }while(choice<1 || choice>5);
 
         //process the choice
-        switch (choice){
-
-            case 1:
-                Main.showTransHistory(theUser, sc);
-                break;
-
-            case 2:
-                Main.withdrawlFunds(theUser, sc);
-                break;
-            case 3:
-                Main.depositFunds(theUser, sc);
-                break;
-            case 4:
-                Main.transferFunds(theUser, sc);
-                break;
+        switch (choice) {
+            case 1 -> Main.showTransHistory(theUser, sc);
+            case 2 -> Main.withdrawlFunds(theUser, sc);
+            case 3 -> Main.depositFunds(theUser, sc);
+            case 4 -> Main.transferFunds(theUser, sc);
         }
 
         //redisplay the menu unless the user wants to quit
         if(choice!=5) {
             Main.printUserMenu(theUser, sc);
         }
+    }
+
+    private static void showTransHistory(User theUser, Scanner sc) {
+
+        int theAcct;
+        //get the account whose transaction history to look at
+        do {
+           System.out.printf("Enter the number (1-%d) of the account\n whose transactions you want to see:",
+                   theUser.numAccounts());
+           theAcct = sc.nextInt()-1;
+           if(theAcct<0|| theAcct >theUser.numAccounts())
+               System.out.println("Invalid account. Pleas try aain.");
+        }while(theAcct<0|| theAcct >theUser.numAccounts());
+
+        //print the transaction history
     }
 }

@@ -2,6 +2,7 @@ import java.util.Date;
 
 public class Transaction {
 
+
     /**
      * The amount of the transaction
      */
@@ -40,5 +41,13 @@ public class Transaction {
        //set the memo
         this.memo = memo;
 
+    }
+
+    /**
+     * get the amount of the transaction
+     * @return
+     */
+    public double getAmount() {
+        return this.amount;
     }
 }

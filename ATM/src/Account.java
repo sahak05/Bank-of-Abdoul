@@ -48,4 +48,34 @@ public class Account {
     public String getUUID() {
          return this.uuid;
     }
+
+    /**
+     * get summary line for the account
+     * @return
+     */
+    public String getSummaryLine() {
+
+        //get the balance
+        double balance = this.getBalance();
+
+        //format the summary line, depending on the wether the balance is
+        if(balance>=0) {
+            return String.format("%s : $%.02f : %s", this.uuid, balance, this.name);
+        }
+        else{
+            return String.format("%s : $(%.02f) : %s", this.uuid, balance, this.name);
+        }
+    }
+
+    /**
+     * get the balance of this account by adding the amounts of the transactions
+     * @return {double} balance
+     */
+    private double getBalance() {
+        double balance = 0;
+        for(Transaction t: this.transactions){
+            balance+=t.getAmount();
+        }
+        return balance;
+    }
 }
