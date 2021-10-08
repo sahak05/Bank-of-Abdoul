@@ -74,6 +74,22 @@ public class User {
     }
 
     /**
+     * first Name of the user
+     * @return
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * last name of the user
+     * @return
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
      * add an account
      * @param acc
      */
@@ -96,5 +112,17 @@ public class User {
             System.exit(1);
         }
         return false;
+    }
+
+    /**
+     * Print summaries for the account of this user
+     */
+    public void printAccountsSummary() {
+        System.out.printf("\n\n%s's accounts summary", this.getFirstName());
+
+        for (Account account : this.accounts) {
+            System.out.printf("%d) %s\n", account.getSummaryLine());
+        }
+        System.out.println();
     }
 }

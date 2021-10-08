@@ -37,7 +37,7 @@ public class Main {
      * @return
      */
 
-    private static User mainMenuPrompt(Bank theBank, Scanner scan) {
+    public static User mainMenuPrompt(Bank theBank, Scanner scan) {
 
         //inits
         String userID, pin;
@@ -57,5 +57,51 @@ public class Main {
         }
         while(authUser==null); //continue looping untill successful login
         return authUser;
+    }
+
+    public static void printUserMenu(User theUser, Scanner sc){
+        //print a summary of the user's accounts
+        theUser.printAccountsSummary();
+
+        //init
+        int choice;
+
+        //user menu
+        do {
+            System.out.printf("Welcome %s, what would you like to do?", theUser.getFirstName());
+            System.out.println("2) Withdrawl");
+            System.out.println("3) Deposit");
+            System.out.println("4) Transfer");
+            System.out.println("5) Quit");
+            System.out.println();
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            if(choice <1 || choice>5)
+                System.out.println("Invalid choice. Please choose 1-5");
+        }while(choice<1 || choice>5);
+
+        //process the choice
+        switch (choice){
+
+            case 1:
+                Main.showTransHistory(theUser, sc);
+                break;
+
+            case 2:
+                Main.withdrawlFunds(theUser, sc);
+                break;
+            case 3:
+                Main.depositFunds(theUser, sc);
+                break;
+            case 4:
+                Main.transferFunds(theUser, sc);
+                break;
+        }
+
+        //redisplay the menu unless the user wants to quit
+        if(choice!=5) {
+            Main.printUserMenu(theUser, sc);
+        }
     }
 }
