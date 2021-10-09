@@ -141,4 +141,13 @@ public class User {
     public void printAccTransHistory(int acctidx){
         this.accounts.get(acctidx).printTransHistory();
     }
+
+    /**
+     * Get the balance for a particular account
+     * @param {int} fromAcct
+     * @return double
+     */
+    public double getAcctBalance(int fromAcct) {
+        return this.accounts.get(fromAcct).getBalance();
+    }
 }

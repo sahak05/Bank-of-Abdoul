@@ -33,8 +33,8 @@ public class Main {
     /**
      * Want to keep the login space open until we have a real user of the Bank
      * @param {Bank} theBank
-     * @param scan
-     * @return
+     * @param {Scanner}scan
+     * @return User
      */
 
     public static User mainMenuPrompt(Bank theBank, Scanner scan) {
@@ -95,7 +95,58 @@ public class Main {
         }
     }
 
-    private static void showTransHistory(User theUser, Scanner sc) {
+    public static void transferFunds(User theUser, Scanner sc) {
+
+        //inits
+        int fromAcct;
+        int toAcct;
+        double amount;
+        double acctBal;
+
+        //get the account to transfer from
+        do {
+            System.out.printf("Enter the number (1-%d) of the account\n"+"to transfer from: ");
+            fromAcct = sc.nextInt()-1;
+
+            if(fromAcct <0|| fromAcct> theUser.numAccounts())
+                System.out.println("Invalid account. Pleas try again.");
+        }while(fromAcct <0|| fromAcct> theUser.numAccounts());
+        acctBal = theUser.getAcctBalance(fromAcct);
+
+        //account to transfer to
+        do {
+            System.out.printf("Enter the number (1-%d) of the account\n"+"to transfer to: ");
+            toAcct = sc.nextInt()-1;
+
+            if(toAcct <0|| toAcct> theUser.numAccounts())
+                System.out.println("Invalid account. Pleas try again.");
+        }while(toAcct <0|| toAcct> theUser.numAccounts());
+
+        //the amount to transfer
+        do {
+            System.out.printf("Enter the amount to transfer (max $%s.02f): $ ", acctBal);
+            amount = sc.nextInt()-1;
+
+            if(amount <0)
+                System.out.println("Amount must be greater than zero.");
+            else if(amount>acctBal)
+                System.out.printf("Amount mustn't be greater than balance of $%.02f.\n", acctBal);
+        }while(amount <0|| amount> acctBal);
+
+        //finally, do the transfer
+        theUser.addAcctTransaction(fromAcct, -1*amount, String.format("Transfer to account %s",
+                theUser.getAcctUUID(toAcct)));
+
+        theUser.addAcctTransaction(toAcct, amount, String.format("Transfer from account %s",
+                theUser.getAcctUUID(fromAcct)));
+    }
+
+    /**
+     * Show the transaction history for an account
+     * @param {User} theUser
+     * @param {Scanner} sc
+     */
+    public static void showTransHistory(User theUser, Scanner sc) {
 
         int theAcct;
         //get the account whose transaction history to look at
@@ -104,9 +155,12 @@ public class Main {
                    theUser.numAccounts());
            theAcct = sc.nextInt()-1;
            if(theAcct<0|| theAcct >theUser.numAccounts())
-               System.out.println("Invalid account. Pleas try aain.");
+               System.out.println("Invalid account. Pleas try again.");
         }while(theAcct<0|| theAcct >theUser.numAccounts());
 
         //print the transaction history
+        theUser.printAccTransHistory(theAcct);
     }
+
+
 }
