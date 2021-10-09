@@ -133,4 +133,12 @@ public class User {
     public int numAccounts(){
         return this.accounts.size();
     }
+
+    /**
+     * Print transaction history for a particular account
+     * @param {int} acctidx
+     */
+    public void printAccTransHistory(int acctidx){
+        this.accounts.get(acctidx).printTransHistory();
+    }
 }
