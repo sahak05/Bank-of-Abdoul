@@ -89,4 +89,15 @@ public class Account {
         }
         System.out.println();
     }
+
+    /**
+     * add a new transaction
+     * @param v
+     * @param memo
+     */
+    public void addTransaction(double v, String memo) {
+        //create a new transaction object and add it to our list
+        Transaction newTrans = new Transaction(v,memo,this);
+        this.transactions.add(newTrans);
+    }
 }

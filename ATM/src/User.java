@@ -118,10 +118,10 @@ public class User {
      * Print summaries for the account of this user
      */
     public void printAccountsSummary() {
-        System.out.printf("\n\n%s's accounts summary", this.getFirstName());
+        System.out.printf("\n\n%s's accounts summary\n  ", this.getFirstName());
 
         for (int a=0; a<this.accounts.size(); a++) {
-            System.out.printf("%d) %s\n", a+1,this.accounts.get(a).getSummaryLine());
+            System.out.printf("  %d) %s\n", a+1,this.accounts.get(a).getSummaryLine());
         }
         System.out.println();
     }
@@ -149,5 +149,24 @@ public class User {
      */
     public double getAcctBalance(int fromAcct) {
         return this.accounts.get(fromAcct).getBalance();
+    }
+
+    /**
+     * retourne the particular account in all of the user's accounts
+     * @param fromAcct
+     * @return
+     */
+    public  String getAcctUUID(int fromAcct) {
+        return this.accounts.get(fromAcct).getUUID();
+    }
+
+    /**
+     *Add a transaction to a particular account
+     * @param acctIdx the index of the account
+     * @param v the amount of the transaction
+     * @param memo the memo of the transaction
+     */
+    public void addAcctTransaction(int acctIdx, double v, String memo) {
+        this.accounts.get(acctIdx).addTransaction(v, memo);
     }
 }
